@@ -25,6 +25,7 @@ jobs:
       # ✅ 3) pip 최신화 및 의존성 설치
       - name: Install dependencies
         run: |
+          pip install uv
           uv sync
 
       # ✅ 4)  테스트 실행 -> 1개만 실패해도 무조건 중단
