@@ -33,7 +33,7 @@ jobs:
       - name: Run tests
         run: |
           echo "테스트 스크립트 실행 (pytest)"
-          pytest --maxfail=1 --disable-warnings -q
+          uv run pytest --maxfail=1 --disable-warnings -q
 
       # ✅ 5) Docker Build
       - name: Setup Docker Buildx
