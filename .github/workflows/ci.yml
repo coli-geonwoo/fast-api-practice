@@ -64,6 +64,19 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
+      # ✅ 2) Docker 권한 확인 및 그룹 추가 (필요 시)
+      - name: Ensure Docker permissions
+        run: |
+          if ! groups $USER | grep -q "\bdocker\b"; then
+            echo "Adding $USER to docker group"
+            sudo usermod -aG docker $USER
+            echo "You need to log out and log in again or restart the runner for permissions to take effect"
+          else
+            echo "$USER already in docker group"
+          fi
+          # 임시로 sudo 없이 docker 실행 가능하도록 export
+          export DOCKER_HOST=unix:///var/run/docker.sock      
+
       - name: Pull latest dev image
         run: |
           sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/$DOCKERHUB_REPOSITORY:${{ github.sha }}-dev
