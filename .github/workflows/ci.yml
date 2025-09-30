@@ -66,18 +66,18 @@ jobs:
 
       - name: Pull latest dev image
         run: |
-          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/$DOCKERHUB_REPOSITORY:${{ github.sha }}-dev
+          sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/$DOCKERHUB_REPOSITORY:${{ github.sha }}-dev
 
       - name: Stop existing container if running
         run: |
           if [ $(docker ps -q -f name=nasa-hackerton) ]; then
-            docker stop nasa-hackerton
-            docker rm nasa-hackerton
+            sudo docker stop nasa-hackerton
+            sudo docker rm nasa-hackerton
           fi
 
       - name: Run container
         run: |
-          docker run -d \
+          sudo docker run -d \
             --name nasa-hackerton \
             -p 8080:8080 \
             ${{ secrets.DOCKERHUB_USERNAME }}/$DOCKERHUB_REPOSITORY:${{ github.sha }}-dev
