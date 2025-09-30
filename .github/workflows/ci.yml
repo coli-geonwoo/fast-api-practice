@@ -32,7 +32,7 @@ jobs:
       # ✅ 4)  테스트 실행 -> 1개만 실패해도 무조건 중단
       - name: Run tests
         run: |
-          echo "테스트 스크립트가 있다면 여기서 실행 (pytest 등)"
+          echo "테스트 스크립트 실행 (pytest)"
           pytest --maxfail=1 --disable-warnings -q
 
       # ✅ 5) Docker Build
