@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install uv
-          uv sync
+          uv sync --dev
 
       # ✅ 4)  테스트 실행 -> 1개만 실패해도 무조건 중단
       - name: Run tests
